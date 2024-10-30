@@ -1,4 +1,4 @@
-from GUI.MainWindow import MainWindow
+from GUI.main_window import MainWindow
 from PyQt6.QtWidgets import QApplication
 
 if __name__ == "__main__":
