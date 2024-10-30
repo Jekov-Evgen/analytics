@@ -1,8 +1,7 @@
 from PyQt6.QtWidgets import QLabel, QVBoxLayout, QHBoxLayout, QPushButton, QMainWindow, QWidget, QLineEdit, QMessageBox
 from PyQt6.QtGui import QIcon
+from DataProcessing import getting_data_from_links
 from GUI.style import CONST_STYLE_WINDOW
-from tkinter import filedialog
-
 
 class MainWindow(QMainWindow):
     def __init__(self) -> None:
@@ -11,6 +10,8 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Программа анализа видео на ютуб")
         self.setStyleSheet(CONST_STYLE_WINDOW)
         self.setWindowIcon(QIcon("Image\icon.jpg"))
+        
+        self.error = None
         
         control_UI = QVBoxLayout()
         size_control = QHBoxLayout()
@@ -39,9 +40,10 @@ class MainWindow(QMainWindow):
     def file_selection(self):
         try:
             receiving_data = str(self.entering_links.text()).split(';')
-            print(receiving_data)
+            
+            getting_data_from_links(receiving_data)
         except:
-            error = QMessageBox()
-            error.setWindowTitle("Ошибка ввода")
-            error.setText("Вы совершили ошибку ввода")
-            error.show()
+            self.error = QMessageBox()
+            self.error.setWindowTitle("Ошибка ввода")
+            self.error.setText("Вы совершили ошибку ввода")
+            self.error.show()
